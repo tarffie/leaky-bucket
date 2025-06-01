@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+
+    // Jest type support
+    "types": ["jest", "node"],
+
+    // Path aliases (adjust according to your project structure)
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"],
+      "@utils/*": ["utils/*"],
+      "@tests/*": ["tests/*"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*", // Include test files
+    "**/*.d.ts" // Include type definitions
+  ],
+  "exclude": ["node_modules", "dist"]
+}
