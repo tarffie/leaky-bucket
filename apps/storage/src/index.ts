@@ -1,5 +1,5 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
-import { config } from 'utils/config';
+import { config } from '@/utils/config';
 
 const uri = config.DATABASE_URI;
 

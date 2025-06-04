@@ -4,7 +4,7 @@ services:
     # Use the Dockerfile located in your apps/backend directory
     build:
       context: .
-      dockerfile: apps/backend/Dockerfile
+      dockerfile: ./apps/backend/Dockerfile
 
     ports:
       - ${API_PORT_LOCAL}:${API_PORT_DOCKER}
@@ -26,6 +26,31 @@ services:
     # This typically uses nodemon for hot-reloading during development
     command: sh -c "cd /app && pnpm --filter ./apps/backend run dev"
     stop_signal: SIGINT
+  storage:
+    build:
+      context: .
+      dockerfile: ./apps/storage/Dockerfile
+    depends_on:
+      mongo-storage:
+        condition: service_healthy
+    environment:
+      - MONGO_URI=${MONGODB_URI}
+    ports:
+      - ${STORAGE_LOCAL_PORT}:${STORAGE_DOCKER_PORT}
+  mongo-storage:
+    build:
+      context: .
+      dockerfile: ./apps/mongo-storage/Dockerfile
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - ${MONGODB_LOCAL_PORT}:${MONGODB_DOCKER_PORT}
+      - '27017:27017'
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', "db.runCommand('ping').ok", '--quiet']
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # Frontend Service (Placeholder)
   # Uncomment and configure this service once you have a frontend application
@@ -63,5 +88,6 @@ services:
   #     timeout: 5s
   #     retries: 5
 # Define named volumes for persistent data (if needed)
-# volumes:
-#   db_data:
+
+volumes:
+  mongo-data:

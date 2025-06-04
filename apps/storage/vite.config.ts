@@ -1,30 +1,38 @@
+// vite.config.ts
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [tsconfigPaths()],
   build: {
     outDir: 'dist',
-    emptyOutDir: true,
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'Storage',
-      formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format === 'es' ? 'mjs' : 'js'}`,
+      entry: 'src/index.ts',
+      formats: ['cjs', 'es'],
+      fileName: (format) => (format === 'es' ? 'index.mjs' : 'index.js'),
     },
-    sourcemap: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
     rollupOptions: {
-      external: ['mongodb', '@woovi/common'],
+      // Ensure Node.js built-ins are not externalized
+      external: [],
       output: {
-        interop: 'auto',
+        globals: {
+          path: 'path',
+          os: 'os',
+          crypto: 'crypto',
+          util: 'util', // Add util to fix promisify
+        },
       },
     },
-    target: 'esnext',
+    // Target Node.js v24
+    target: 'node24',
+    // Disable minification for debugging
+    minify: false,
   },
-  resolve: {
-    alias: {
-      '@woovi/common': resolve(__dirname, '../common/src'),
-    },
+  // Ensure process.env is available
+  define: {
+    'process.env': 'process.env',
   },
 });

@@ -5,6 +5,7 @@
   "type": "module",
   "main": "./dist/common.js",
   "types": "./dist/main.d.ts",
+  "composite": true,
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

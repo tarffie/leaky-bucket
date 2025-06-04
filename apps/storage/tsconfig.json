@@ -2,18 +2,18 @@
   "extends": "../../packages/common/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "/",
     "module": "esnext",
     "target": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
       "@woovi/common/*": ["../../packages/common/src/*"],
       "@/*": ["./src/*"]
     }
   },
   "include": ["src/*", "vite.config.ts", "jest.config.ts"],
-  "references": [{ "path": "../../packages/common/" }]
+  "reference": "dist/*.js"
 }
