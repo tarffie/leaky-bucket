@@ -32,21 +32,21 @@
   "dependencies": {
     "@woovi/common": "workspace:*",
     "dotenv": "^16.5.0",
-    "mongodb": "^6.16.0"
+    "mongodb": "^6.17.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
-    "@typescript-eslint/eslint-plugin": "^8.8.1",
-    "@typescript-eslint/parser": "^8.8.1",
-    "eslint": "^9.13.0",
+    "@typescript-eslint/eslint-plugin": "^8.33.1",
+    "@typescript-eslint/parser": "^8.33.1",
+    "eslint": "^9.28.0",
     "jest": "^29.7.0",
     "nodemon": "^3.1.10",
-    "ts-jest": "^29.2.5",
+    "ts-jest": "^29.3.4",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3",
-    "vite": "^6.3.4",
-    "vite-tsconfig-paths": "^5.1.1"
+    "vite": "^6.3.5",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "exports": {
     ".": {

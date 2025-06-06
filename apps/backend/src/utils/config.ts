@@ -4,10 +4,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 function validateConfig(): Config {
-  const { PORT } = process.env;
+  const { API_PORT_LOCAL } = process.env;
 
   const requiredEnvVars = {
-    PORT,
+    API_PORT_LOCAL,
   };
 
   const missingVars = Object.entries(requiredEnvVars)
@@ -21,7 +21,7 @@ function validateConfig(): Config {
   }
 
   return {
-    PORT: PORT!,
+    PORT: API_PORT_LOCAL!,
   };
 }
 

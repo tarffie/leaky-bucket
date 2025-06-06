@@ -8,12 +8,10 @@ if (dotenvResult.error) {
 }
 
 function validateConfig(): Config {
-  const { DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_URI } = process.env;
+  const { MONGODB_URI } = process.env;
 
   const requiredEnvVars: Record<string, string | undefined> = {
-    DATABASE_USERNAME,
-    DATABASE_PASSWORD,
-    DATABASE_URI,
+    MONGODB_URI,
   };
 
   const missingOrInvalidVars = Object.entries(requiredEnvVars)
@@ -28,9 +26,10 @@ function validateConfig(): Config {
     );
   }
   // Additional validation for DATABASE_URI format (basic check)
+
   if (
-    !DATABASE_URI!.startsWith('mongodb://') &&
-    !DATABASE_URI!.startsWith('mongodb+srv://')
+    !MONGODB_URI!.startsWith('mongodb://') &&
+    !MONGODB_URI!.startsWith('mongodb+srv://')
   ) {
     throw new Error(
       'DATABASE_URI must be a valid MongoDB connection string (e.g., mongodb:// or mongodb+srv://)',
@@ -38,9 +37,7 @@ function validateConfig(): Config {
   }
 
   return {
-    DATABASE_USERNAME: DATABASE_USERNAME!,
-    DATABASE_PASSWORD: DATABASE_PASSWORD!,
-    DATABASE_URI: DATABASE_URI!,
+    DATABASE_URI: MONGODB_URI!,
   } as Config;
 }
 

@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:latest
 
 WORKDIR /app
 
@@ -9,10 +9,10 @@ RUN npm install -g pnpm@10.7.0 && pnpm install
 COPY . .
 
 # Build TypeScript code with Vite
-RUN pnpm run build
+RUN pnpm build
 
 # Expose port (assuming 3000, adjust if needed)
-EXPOSE 9000 
+EXPOSE 5000
 
 # Start the service
 CMD ["pnpm", "start"]

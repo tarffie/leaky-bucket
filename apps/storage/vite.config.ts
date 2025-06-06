@@ -9,25 +9,23 @@ export default defineConfig({
     lib: {
       entry: 'src/index.ts',
       formats: ['cjs', 'es'],
-      fileName: (format) => (format === 'es' ? 'index.mjs' : 'index.js'),
+      fileName: (format: string) =>
+        format === 'es' ? 'index.mjs' : 'index.js',
     },
     commonjsOptions: {
       transformMixedEsModules: true,
     },
     rollupOptions: {
-      // Ensure Node.js built-ins are not externalized
-      external: [],
+      external: ['mongodb', 'util', 'crypto', 'path', 'os', 'fs'],
       output: {
         globals: {
           path: 'path',
           os: 'os',
           crypto: 'crypto',
-          util: 'util', // Add util to fix promisify
         },
       },
     },
-    // Target Node.js v24
-    target: 'node24',
+    target: 'node22',
     // Disable minification for debugging
     minify: false,
   },
