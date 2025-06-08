@@ -1,12 +1,12 @@
-import 'module-alias/register';
-
 import Koa from 'koa';
 import Router from '@koa/router';
 import bodyParser from 'koa-bodyparser';
+import { createBucket } from './utils/bucket';
+import { defineConfig } from '@woovi/common';
+import { resolve } from 'path';
 
-import { createBucket } from '@utils/bucket';
-
-import { config } from '@utils/config';
+const dirPath = resolve(__dirname, '../');
+const config = JSON.parse(JSON.stringify(defineConfig(dirPath)));
 
 const app = new Koa();
 const router = new Router();
@@ -20,7 +20,7 @@ router.get('/bucket', (ctx) => {
 
 app.use(router.routes()).use(router.allowedMethods());
 
-const port = config.PORT || 3000;
+const port = config.SERVER_PORT_LOCAL || 3000;
 
 app.listen(port, () => {
   console.log('Listening in port: ' + port);

@@ -1,0 +1,3 @@
+{
+  "keys": ["STORAGE_LOCAL_PORT", "STORAGE_DOCKER_PORT", "MONGODB_URI"]
+}

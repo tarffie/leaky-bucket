@@ -1,43 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "target": "es2022",
+    "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
-    "declaration": true,
-    "sourceMap": true,
-    "allowJs": true,
-    "paths": {
-      "@woovi/common/*": ["../../packages/common/src/*"],
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["src/**/*", "../vite.config.ts"],
-  "exclude": ["node_modules", "dist"]
-}
-
-/*
-{
-  "extends": "../../packages/common/tsconfig.json",
-  "compilerOptions": {
-    "outDir": "./dist/",
-    "rootDir": "/",
-    "module": "NodeNext",
-    "target": "ES2022",
-    "moduleResolution": "NodeNext",
-    "esModuleInterop": true,
     "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "declaration": true,
     "baseUrl": ".",
     "paths": {
-      "@woovi/common/*": ["../../packages/common/src/*"],
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"],
+      "@woovi/common": ["../../packages/common/dist/index"],
+      "@woovi/common/": ["../../packages/common/dist/index"],
+      "@woovi/common/*": ["../../packages/common/dist/*"]
     }
   },
-  "include": ["src/*", "vite.config.ts", "jest.config.ts"],
-  "reference": "dist/*.js"
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
-*/

@@ -19,8 +19,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky",
-    "postinstall": "pnpm --filter common build",
-    "clean": "pnpm -r exec -- rimraf dist node_modules",
+    "clean": "pnpm -r exec -- rm -rfv dist node_modules && rm -rfv node_modules",
     "common": "pnpm --filter common"
   },
   "keywords": [],

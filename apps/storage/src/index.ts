@@ -1,9 +1,12 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
-import { config } from '@/utils/config';
+import { defineConfig } from '@woovi/common';
+import { resolve } from 'path';
 
-const uri = config.DATABASE_URI;
+const dirPath = resolve(__dirname, '../');
 
-const client = new MongoClient(uri, {
+const config = JSON.parse(JSON.stringify(defineConfig(dirPath)));
+
+const client = new MongoClient(config.MONGODB_URI, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,

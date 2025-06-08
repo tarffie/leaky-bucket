@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2020",
+    "target": "es2022",
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
@@ -10,22 +10,16 @@
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
     "resolveJsonModule": true,
-
-    // Jest type support
     "types": ["jest", "node"],
-
-    // Path aliases (adjust according to your project structure)
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@utils/*": ["utils/*"],
-      "@tests/*": ["tests/*"]
+      "@/*": ["src/*"],
+      "@utils/*": ["src/utils/*"],
+      "@tests/*": ["src/tests/*"],
+      "@woovi/common": ["../../packages/common/dist/index"],
+      "@woovi/common/*": ["../../packages/common/dist/*"]
     }
   },
-  "include": [
-    "src/**/*",
-    "tests/**/*", // Include test files
-    "**/*.d.ts" // Include type definitions
-  ],
+  "include": ["src/**/*", "tests/**/*", "**/*.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

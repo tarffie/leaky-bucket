@@ -1,0 +1,3 @@
+{
+  "keys": ["SERVER_PORT_LOCAL", "SERVER_PORT_DOCKER"]
+}
