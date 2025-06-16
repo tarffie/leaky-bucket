@@ -1,0 +1,35 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./apps/server/Dockerfile
+    ports:
+      - '${SERVER_PORT_LOCAL}:${SERVER_PORT_DOCKER}'
+    environment:
+      - NODE_ENV=development
+      - SERVER_PORT_LOCAL=${SERVER_PORT_LOCAL}
+      - SERVER_PORT_DOCKER=${SERVER_PORT_DOCKER}
+    volumes:
+      - ./apps/server/src:/app/apps/server/src
+      - ./apps/server/envkeys.json:/app/apps/server/envkeys.json
+      - ./apps/server/.env:/app/apps/server/.env
+      - ./packages/common:/app/packages/common
+    command: sh -c "cd /app/apps/server && pnpm dev"
+    stop_signal: SIGINT
+    depends_on:
+      mongo-storage:
+        condition: service_healthy
+  mongo-storage:
+    image: mongo:latest
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - '${MONGODB_LOCAL_PORT:-27017}:27017'
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', "db.runCommand('ping').ok", '--quiet']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongo-data:

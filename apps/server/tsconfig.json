@@ -14,7 +14,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@utils/*": ["src/utils/*"],
       "@tests/*": ["src/tests/*"],
       "@woovi/common": ["../../packages/common/dist/index"],
       "@woovi/common/*": ["../../packages/common/dist/*"]

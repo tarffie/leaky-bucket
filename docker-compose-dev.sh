@@ -12,10 +12,10 @@ shift # Remove the first argument, leaving the rest for Docker Compose commands
 
 # List of environment files
 env_files=(
-  "apps/backend/.env.backend.dev"
+  "apps/server/.env.backend.dev"
   "apps/storage/.env.storage.dev"
   "apps/mongo-storage/.env.database.dev"
-  "apps/client/.env.client.dev"
+  "apps/web/.env.client.dev"
 )
 
 # Build the command

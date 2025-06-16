@@ -2,6 +2,8 @@ import { config } from 'dotenv';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
+const BASE_CONFIG_DIR = '/packages/common/';
+
 function generateConfig(
   servicePath: string,
 ): Record<string, string> | undefined {
@@ -22,13 +24,17 @@ function generateConfig(
       );
     }
 
-    config({
-      path: resolve(servicePath, '.env'),
+    const dotenvResult = config({
+      path: servicePath,
       encoding: 'utf-8',
     });
 
+    if (dotenvResult.error) {
+      throw new Error(dotenvResult.error.message);
+    }
+
     const missingVars = Object.entries(envkeys.keys)
-      .filter(([key, value]) => !value || !process.env[envkeys.keys[key]])
+      .filter(([key]) => !process.env[key])
       .map(([key]) => key);
     if (missingVars.length > 0) {
       throw new Error(
@@ -36,9 +42,16 @@ function generateConfig(
       );
     }
 
-    let envConfig = {};
+    let envConfig: Record<string, string> = {};
     for (const key of envkeys.keys) {
-      envConfig = { ...envConfig, [key]: process.env[key] };
+      const value = process.env[key];
+      if (typeof value === 'string') {
+        envConfig[key] = process.env[key] as string;
+      } else {
+        console.warn(
+          `Environment variable ${key} is not a string or is undefined`,
+        );
+      }
     }
 
     return envConfig;

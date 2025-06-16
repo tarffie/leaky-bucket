@@ -1,1 +1,1 @@
-export { generateConfig as defineConfig } from './generateConfig';
+export { generateConfig } from './generateConfig';

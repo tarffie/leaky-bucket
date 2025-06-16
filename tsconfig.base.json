@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es2022",
     "module": "commonjs",
     "outDir": "./dist",
@@ -10,12 +11,10 @@
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
     "declaration": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@woovi/common": ["../../packages/common/dist/index"],
-      "@woovi/common/": ["../../packages/common/dist/index"],
-      "@woovi/common/*": ["../../packages/common/dist/*"]
+      "@woovi/common": ["packages/common/src/*"],
+      "@woovi/server": ["apps/server/src/*"],
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"],

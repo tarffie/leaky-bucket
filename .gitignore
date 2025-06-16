@@ -7,3 +7,4 @@ node_modules/
 dist/
 *.~undo-tree~
 .DS_Store
+*/tsconfig.tsbuildinfo
